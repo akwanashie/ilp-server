@@ -1,4 +1,4 @@
-export interface Variable {
+export class Variable {
   name: string
   value: number
 }
