@@ -1,5 +1,5 @@
 import { Model, Variable } from './Model'
-import { ModelFormatException } from './ModelExceptions'
+import { ModelFormatException, VariableFormatException } from './ModelExceptions'
 
 export class ModelParser {
   parse(rawJson): Model {
@@ -22,17 +22,23 @@ export class ModelParser {
   }
 
   private extractVariables(rawVariables): Variable[] {
-    if(rawVariables
-      && Array.isArray(rawVariables)
-      && rawVariables.length > 0) {
+    if (this.isNonEmptyArray(rawVariables)) {
         return rawVariables.map((rawVariable) => {
-          return {
-            name: rawVariable.toString(),
-            value: 0
+          if (typeof rawVariable === 'string') {
+            return {
+              name: rawVariable,
+              value: 0
+            }
+          } else {
+            throw new VariableFormatException('variable name must conform to standards')
           }
         })
     } else {
       throw new ModelFormatException('no variables provided')
     }
+  }
+
+  private isNonEmptyArray(input: any[]): boolean {
+    return input && Array.isArray(input) && input.length > 0
   }
 }
