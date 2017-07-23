@@ -6,15 +6,17 @@
   "author": "Augustine Kwanashie",
   "license": "MIT",
   "scripts": {
-    "clear": "rm -rf stage dist",
+    "clear": "rm -rf stage dist && ./node_modules/.bin/nsp check",
     "build": "yarn clear && tsc -p tsconfig.build.json",
-    "test": "yarn clear && tsc -p tsconfig.json && mocha --opts ./ stage/test"
+    "test": "yarn clear && tsc -p tsconfig.json && nyc mocha --opts ./ stage/test"
   },
   "devDependencies": {
     "@types/chai": "^4.0.1",
     "@types/mocha": "^2.2.41",
     "chai": "^4.1.0",
     "generate-random-data": "git+ssh://git@github.com:akwanashie/generate-random-data.git",
-    "mocha": "^3.4.2"
+    "mocha": "^3.4.2",
+    "nsp": "^2.6.3",
+    "nyc": "^11.0.3"
   }
 }
