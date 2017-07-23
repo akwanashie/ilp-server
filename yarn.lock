@@ -78,9 +78,9 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
 
-generate-random-data@^0.0.3:
+"generate-random-data@git+ssh://git@github.com:akwanashie/generate-random-data.git":
   version "0.0.3"
-  resolved "https://registry.yarnpkg.com/generate-random-data/-/generate-random-data-0.0.3.tgz#0fd9af2d93d50dbac8aa5b33efd5db1059e5d87e"
+  resolved "git+ssh://git@github.com:akwanashie/generate-random-data.git#ba8c622e48e0b042b2b37355062ec4838485ebac"
   dependencies:
     moment "^2.11.2"
 

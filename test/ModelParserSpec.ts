@@ -25,7 +25,7 @@ describe('ModelParser', () => {
 
     it('should throw a VariableFormatException if the variable provided is not a string', () => {
       const rawJson = {
-        variables: [random.int(10, 100)]
+        variables: random.array(() => random.int(10, 100), 10)
       }
 
       const modelParser = new ModelParser()
@@ -33,13 +33,15 @@ describe('ModelParser', () => {
     })
 
     it('should return a model with the correct variable', () => {
-      const variableName = random.str('lower', 10, 10)
+      const variableNames = random.array(() => random.str('lower', 10, 10), 10)
       const rawJson = {
-        variables: [variableName]
+        variables: variableNames
       }
 
       const modelParser = new ModelParser()
-      modelParser.parse(rawJson).variables.should.deep.include({ name: variableName, value: 0 })
+      modelParser.parse(rawJson)
+        .variables.map((variable) => variable.name)
+        .should.eql(variableNames)
     })
   })
 })

@@ -14,7 +14,7 @@
     "@types/chai": "^4.0.1",
     "@types/mocha": "^2.2.41",
     "chai": "^4.1.0",
-    "generate-random-data": "^0.0.3",
+    "generate-random-data": "git+ssh://git@github.com:akwanashie/generate-random-data.git",
     "mocha": "^3.4.2"
   }
 }
