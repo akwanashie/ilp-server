@@ -8,7 +8,7 @@
   "scripts": {
     "clear": "rm -rf stage dist && ./node_modules/.bin/nsp check",
     "build": "yarn clear && tsc -p tsconfig.build.json",
-    "test": "yarn clear && tsc -p tsconfig.json && nyc mocha --opts ./ stage/test"
+    "test": "yarn clear && tsc -p tsconfig.json && nyc mocha --opts ./mocha.opts stage/test"
   },
   "devDependencies": {
     "@types/chai": "^4.0.1",

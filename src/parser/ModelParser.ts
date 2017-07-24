@@ -1,5 +1,6 @@
-import { Model, Variable } from './Model'
-import { ModelFormatException, VariableFormatException } from './ModelExceptions'
+import { Model, Variable } from '../model/Model'
+import { ModelFormatException, VariableFormatException } from '../model/ModelExceptions'
+import { VariableParser } from './VariableParser'
 import { getArrayOrThrow } from '../util'
 
 export class ModelParser {
@@ -23,20 +24,6 @@ export class ModelParser {
           }
         }
       }
-    }
-  }
-}
-
-export class VariableParser {
-  parse(rawVariable): Variable {
-    if (typeof rawVariable === 'string') {
-      return {
-        name: rawVariable,
-        value: 0,
-        isInteger: true
-      }
-    } else {
-      throw new VariableFormatException('variable name must conform to standards')
     }
   }
 }
