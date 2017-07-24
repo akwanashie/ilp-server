@@ -43,5 +43,18 @@ describe('ModelParser', () => {
         .variables.map((variable) => variable.name)
         .should.eql(variableNames)
     })
+
+    it('should return a model with variables having their default calues', () => {
+      const rawJson = {
+        variables: random.array(() => random.str('lower', 10, 10), 10)
+      }
+
+      const modelParser = new ModelParser()
+      modelParser.parse(rawJson)
+        .variables.forEach((variable) => {
+          variable.isInteger.should.be.true
+          variable.value.should.eql(0)
+        })
+    })
   })
 })

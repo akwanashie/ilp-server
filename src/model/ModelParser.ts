@@ -14,7 +14,8 @@ export class ModelParser {
           prefix: 0,
           variable: {
             name: '',
-            value: 0
+            value: 0,
+            isInteger: true
           }
         }
       }
@@ -27,7 +28,8 @@ export class ModelParser {
           if (typeof rawVariable === 'string') {
             return {
               name: rawVariable,
-              value: 0
+              value: 0,
+              isInteger: true
             }
           } else {
             throw new VariableFormatException('variable name must conform to standards')

@@ -1,6 +1,7 @@
 export class Variable {
   name: string
   value: number
+  isInteger: boolean
 }
 
 export interface Expression {
