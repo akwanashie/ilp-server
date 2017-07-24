@@ -1,9 +1,13 @@
 import { Model, Variable } from './Model'
 import { ModelFormatException, VariableFormatException } from './ModelExceptions'
+import { getArrayOrThrow } from '../util'
 
 export class ModelParser {
+  constructor(private readonly variableParser: VariableParser) {}
+
   parse(rawJson): Model {
-    const variables = this.extractVariables(rawJson.variables)
+    const variables = getArrayOrThrow(rawJson.variables, new ModelFormatException('no variables provided'))
+      .map(this.variableParser.parse)
 
     return {
       variables,
@@ -21,26 +25,18 @@ export class ModelParser {
       }
     }
   }
+}
 
-  private extractVariables(rawVariables): Variable[] {
-    if (this.isNonEmptyArray(rawVariables)) {
-        return rawVariables.map((rawVariable) => {
-          if (typeof rawVariable === 'string') {
-            return {
-              name: rawVariable,
-              value: 0,
-              isInteger: true
-            }
-          } else {
-            throw new VariableFormatException('variable name must conform to standards')
-          }
-        })
+export class VariableParser {
+  parse(rawVariable): Variable {
+    if (typeof rawVariable === 'string') {
+      return {
+        name: rawVariable,
+        value: 0,
+        isInteger: true
+      }
     } else {
-      throw new ModelFormatException('no variables provided')
+      throw new VariableFormatException('variable name must conform to standards')
     }
-  }
-
-  private isNonEmptyArray(input: any[]): boolean {
-    return input && Array.isArray(input) && input.length > 0
   }
 }
