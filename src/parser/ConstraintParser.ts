@@ -7,14 +7,14 @@ export class ConstraintParser {
     if (isNonEmptyOrThrow(rawConstraint, new ConstraintFormatException('input string is empty'))) {
       return {
         expression: [],
-        equality: this.containsSingleEquality(rawConstraint),
+        equality: this.getEquality(rawConstraint),
         value: 0
       }
     }
     throw new Error()
   }
 
-  containsSingleEquality (rawConstraint): string {
+  getEquality (rawConstraint): string {
     const equality = EQUALITY.values().filter((equality) => rawConstraint.toString().includes(equality))
     if (equality.length === 0) {
       throw new ConstraintFormatException('no equality value found')
