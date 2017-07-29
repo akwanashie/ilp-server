@@ -8,7 +8,7 @@ export class ModelParser {
 
   parse(rawJson): Model {
     const variables = getArrayOrThrow(rawJson.variables, new ModelFormatException('no variables provided'))
-      .map(this.variableParser.parse)
+      .map((rawVariable) => this.variableParser.parse(rawVariable))
 
     return {
       variables,

@@ -32,8 +32,7 @@ describe('VariableParser', () => {
     it('should a variable with the correct name', () => {
       const variableName = random.str('lower', 10, 10)
       const variableParser = new VariableParser()
-      const variable = variableParser.parse(variableName)
-      variable.name.should.eql(variableName)
+      variableParser.parse(variableName).name.should.eql(variableName)
     })
   })
 })

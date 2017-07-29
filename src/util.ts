@@ -2,7 +2,7 @@ export function isNonEmptyArray(input: any[]): boolean {
   return input && Array.isArray(input) && input.length > 0
 }
 
-export function getArrayOrThrow<T>(input, error: Error): T[] {
+export function getArrayOrThrow(input, error: Error): any[] {
   if (isNonEmptyArray(input)) {
     return input
   } else {

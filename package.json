@@ -17,6 +17,7 @@
     "generate-random-data": "git+ssh://git@github.com:akwanashie/generate-random-data.git",
     "mocha": "^3.4.2",
     "nsp": "^2.6.3",
-    "nyc": "^11.0.3"
+    "nyc": "^11.0.3",
+    "testdouble": "^3.2.2"
   }
 }
