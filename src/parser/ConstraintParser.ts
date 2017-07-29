@@ -24,7 +24,6 @@ export class ConstraintParser {
       throw new ConstraintFormatException('no equality value found')
     }
     else if (equality.length > 1) {
-      console.log(equality)
       throw new ConstraintFormatException('multiple equality values found')
     }
     else return equality[0]
