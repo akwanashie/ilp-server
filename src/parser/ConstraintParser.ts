@@ -4,23 +4,24 @@ import { isNonEmptyOrThrow } from './Validator'
 
 export class ConstraintParser {
   parse(rawConstraint): Constraint {
-    if (
-      isNonEmptyOrThrow(rawConstraint, new ConstraintFormatException('input string is empty')) &&
-      this.containsSingleEquality(rawConstraint)
-    ) {
-      return 
+    if (isNonEmptyOrThrow(rawConstraint, new ConstraintFormatException('input string is empty'))) {
+      return {
+        expression: [],
+        equality: this.containsSingleEquality(rawConstraint),
+        value: 0
+      }
     }
     throw new Error()
   }
 
-  containsSingleEquality (rawConstraint): boolean {
+  containsSingleEquality (rawConstraint): string {
     const equality = EQUALITY.values().filter((equality) => rawConstraint.toString().includes(equality))
-    if (equality.length > 0) {
-      if (equality.length > 1) {
-        throw new ConstraintFormatException('multiple equality values found')
-      } else return true
-    } else {
+    if (equality.length === 0) {
       throw new ConstraintFormatException('no equality value found')
-    } 
+    }
+    else if (equality.length > 1) {
+        throw new ConstraintFormatException('multiple equality values found')
+    }
+    else return equality[0]
   }
 }
