@@ -62,5 +62,26 @@ describe('ConstraintParser', () => {
       const constraintParser = new ConstraintParser()
       constraintParser.parse(inputConstraint).value.should.eql(value)
     })
+
+    it('returns the correct RHS value when it is negetive', () => {
+      const value = -1 * random.integer(10, 100)
+      const inputConstraint = `${random.string(10)} ${randomEquality()} ${value}`
+      const constraintParser = new ConstraintParser()
+      constraintParser.parse(inputConstraint).value.should.eql(value)
+    })
+
+    it('returns the correct RHS value when it is a decimal', () => {
+      const value = random.float(1, 9, 0, 99, 2)
+      const inputConstraint = `${random.string(10)} ${randomEquality()} ${value}`
+      const constraintParser = new ConstraintParser()
+      constraintParser.parse(inputConstraint).value.should.eql(value)
+    })
+
+    it('returns the correct RHS value when it has spaces appended', () => {
+      const value = random.float(1, 9, 0, 99, 2)
+      const inputConstraint = `${random.string(10)} ${randomEquality()} ${value}   `
+      const constraintParser = new ConstraintParser()
+      constraintParser.parse(inputConstraint).value.should.eql(value)
+    })
   })
 })
