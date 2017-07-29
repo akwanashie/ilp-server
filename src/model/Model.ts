@@ -4,19 +4,19 @@ export class Variable {
   isInteger: boolean
 }
 
-export interface Expression {
+export interface Term {
   prefix: number
   variable: Variable
 }
 
 export interface Constraint {
-  expression: Expression[]
+  expression: Term[]
   equality: string
   value: number
 }
 
 export interface Objective {
-  expression: Expression
+  expression: Term[]
   direction: string
 }
 

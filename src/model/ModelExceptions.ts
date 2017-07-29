@@ -11,3 +11,10 @@ export class VariableFormatException extends Error {
     (<any>Object).setPrototypeOf(this, VariableFormatException.prototype)
   }
 }
+
+export class ConstraintFormatException extends Error {
+  constructor(message: string) {
+    super(`Could not parse constraint: ${message}`);
+    (<any>Object).setPrototypeOf(this, ConstraintFormatException.prototype)
+  }
+}

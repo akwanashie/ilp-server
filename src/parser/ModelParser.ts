@@ -15,14 +15,14 @@ export class ModelParser {
       constraints: [],
       objective: {
         direction: '',
-        expression: {
+        expression: [{
           prefix: 0,
           variable: {
             name: '',
             value: 0,
             isInteger: true
           }
-        }
+        }]
       }
     }
   }
