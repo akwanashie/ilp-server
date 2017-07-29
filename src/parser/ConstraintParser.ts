@@ -18,22 +18,29 @@ export class ConstraintParser {
     }
   }
 
-  getEquality (rawConstraint): string {
-    const equality = EQUALITY.values().filter((equality) => rawConstraint.toString().includes(equality))
+  getEquality(rawConstraint): string {
+    const equality = EQUALITY.values().filter((equality) => rawConstraint.toString().includes(` ${equality} `))
     if (equality.length === 0) {
       throw new ConstraintFormatException('no equality value found')
     }
     else if (equality.length > 1) {
-        throw new ConstraintFormatException('multiple equality values found')
+      console.log(equality)
+      throw new ConstraintFormatException('multiple equality values found')
     }
     else return equality[0]
   }
 
-  getValue (rawConstraint): number {
+  getValue(rawConstraint): number {
     const equality = this.getEquality(rawConstraint)
-    if(rawConstraint.toString().endsWith(equality)) {
+    if (rawConstraint.toString().trim().endsWith(equality)) {
       throw new ConstraintFormatException('no RHS value found')
     }
-    else return 0
+    else {
+      const value = parseFloat(rawConstraint.toString().split(equality).pop().trim())
+      if (isNaN(value)) {
+        throw new ConstraintFormatException('RHS must be a number')
+      }
+      else return value
+    }
   }
 }

@@ -40,13 +40,13 @@ describe('ConstraintParser', () => {
 
     it('should return a constraint with the correct equality', () => {
       const equalityValue = randomEquality()
-      const inputConstraint = `${random.string('lower', 10, 10)} ${equalityValue} ${random.string('lower', 10, 10)}`
+      const inputConstraint = `${random.string('lower', 10, 10)} ${equalityValue} ${random.integer(10, 10)}`
       const constraintParser = new ConstraintParser()
       constraintParser.parse(inputConstraint).equality.should.eql(equalityValue)
     })
 
     it('should throw a ConstraintFormatException if the input ends with an equality', () => {
-      const inputConstraint = `${random.string('lower', 10, 10)} ${EQUALITY.EQ}`
+      const inputConstraint = `${random.string('lower', 10, 10)} ${EQUALITY.EQ} `
       const constraintParser = new ConstraintParser()
       should.throw(() => constraintParser.parse(inputConstraint), ConstraintFormatException, /no RHS value found/)
     })
@@ -55,6 +55,13 @@ describe('ConstraintParser', () => {
       const inputConstraint = `${random.string('lower', 10, 10)} ${randomEquality()} abc${random.string('lower', 10, 10)}xyz`
       const constraintParser = new ConstraintParser()
       should.throw(() => constraintParser.parse(inputConstraint), ConstraintFormatException, /RHS must be a number/)
+    })
+
+    it('returns the correct RHS value', () => {
+      const value = random.integer(10, 100)
+      const inputConstraint = `${random.string('lower', 10, 10)} ${randomEquality()} ${value}`
+      const constraintParser = new ConstraintParser()
+      constraintParser.parse(inputConstraint).value.should.eql(value)
     })
   })
 })
