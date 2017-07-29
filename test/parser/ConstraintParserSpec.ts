@@ -9,6 +9,11 @@ import { EQUALITY } from '../../src/model/Model'
 
 describe('ConstraintParser', () => {
   describe('parse', () => {
+    it('should throw a ConstraintFormatException if the input is not a string', () => {
+      const constraintParser = new ConstraintParser()
+      should.throw(() => constraintParser.parse({}), ConstraintFormatException, /constraint input must be a string/)
+    })
+
     it('should throw a ConstraintFormatException if the input string is empty', () => {
       const constraintParser = new ConstraintParser()
       should.throw(() => constraintParser.parse(''), ConstraintFormatException, /input string is empty/)

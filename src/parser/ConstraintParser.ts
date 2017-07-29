@@ -1,17 +1,19 @@
 import { Constraint, EQUALITY } from '../model/Model'
 import { ConstraintFormatException } from '../model/ModelExceptions'
-import { isNonEmptyOrThrow } from './Validator'
+import { isNonEmptyOrThrow, isStringOrThrow } from './Validator'
 
 export class ConstraintParser {
   parse(rawConstraint): Constraint {
-    if (isNonEmptyOrThrow(rawConstraint, new ConstraintFormatException('input string is empty'))) {
+    if (
+      isStringOrThrow(rawConstraint, new ConstraintFormatException('constraint input must be a string')) &&
+      isNonEmptyOrThrow(rawConstraint, new ConstraintFormatException('input string is empty'))
+    ) {
       return {
         expression: [],
         equality: this.getEquality(rawConstraint),
         value: 0
       }
     }
-    throw new Error()
   }
 
   getEquality (rawConstraint): string {
