@@ -42,5 +42,11 @@ describe('ConstraintParser', () => {
       const constraintParser = new ConstraintParser()
       constraintParser.parse(inputConstraint).equality.should.eql(equalityValue)
     })
+
+    it('should throw an error if the input ends with an equality', () => {
+      const inputConstraint = `${random.string('lower', 10, 10)} ${EQUALITY.EQ}`
+      const constraintParser = new ConstraintParser()
+      should.throw(() => constraintParser.parse(inputConstraint), ConstraintFormatException, /no RHS value found/)
+    })
   })
 })
