@@ -4,6 +4,15 @@ export class Variable {
   isInteger: boolean
 }
 
+export const EQUALITY = {
+  GEQ: '>=',
+  LEQ: '<=',
+  EQ: '=',
+  LE: '<',
+  GE: '>',
+  values: () => Object.keys(EQUALITY).map((key) => EQUALITY[key])
+}
+
 export interface Term {
   prefix: number
   variable: Variable
